@@ -3,6 +3,7 @@ package fr.dawan.formationjpa.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -57,13 +58,12 @@ public class Formation extends DbObject{
 	 * Sans l'annotation mappedBy, Hibernate va créer une table 
 	 * de relation , permettant de relier les deux tables
 	 */
-	@OneToMany(mappedBy = "formation")
-	List<SessionFormation> session = new ArrayList<SessionFormation>();
+	@OneToMany(mappedBy = "formation", cascade = CascadeType.PERSIST)
+	List<SessionFormation> sessions = new ArrayList<SessionFormation>();
 	
 	/*
 	 * n -> n 
 	 * ManyToMany
-	 * 
 	 * formateursCompetentsId
 	 */
 	@ManyToMany(mappedBy = "competences")
@@ -100,8 +100,29 @@ public class Formation extends DbObject{
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+
+	public List<SessionFormation> getSessions() {
+		return sessions;
+	}
 	
+	public void addSession(SessionFormation session) {
+		if(!this.sessions.contains(session) && session != null) {
+			this.sessions.add(session);
+		}
+	}
 	
+
+	public void setSessions(List<SessionFormation> sessions) {
+		this.sessions = sessions;
+	}
+
+	public List<Formateur> getFormateursCompetents() {
+		return formateursCompetents;
+	}
+
+	public void setFormateursCompetents(List<Formateur> formateursCompetents) {
+		this.formateursCompetents = formateursCompetents;
+	}
 
 	@Override
 	public String toString() {

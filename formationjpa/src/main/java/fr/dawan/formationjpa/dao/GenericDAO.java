@@ -25,6 +25,7 @@ public class GenericDAO {
 				//On insére une entité 
 				entityManager.persist(entity);
 				
+				
 				//On commit tout ce qui a été fait dans la transaction 
 				transaction.commit();
 			} catch (Exception e) {
@@ -88,8 +89,8 @@ public class GenericDAO {
 		try {
 			transaction.begin();
 			T entity = entityManager.find(clazz, id);
-			entityManager.remove(entity);
-			transaction.commit();
+			entityManager.remove(entity);  //etat Remove
+			transaction.commit();   //supprimé
 		} catch (Exception e) {
 			transaction.rollback();
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package fr.dawan.formationjpa.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,6 +27,7 @@ public class SessionFormation extends DbObject{
 	 * Many : SessionFormation 
 	 * One : Formation
 	 */
+	
 	/*
 	 * L'entité qui est relié à une seule entité est l'entité 
 	 * qui possedera la clé étrangère
@@ -35,6 +37,7 @@ public class SessionFormation extends DbObject{
 	 * On peut specifier le nom de la clé étrangère avec l'annotation 
 	 * @JoinColumn
 	 */
+	//@ManyToOne (cascade = CascadeType.PERSIST)
 	@ManyToOne
 	@JoinColumn(name="id_formation")
 	private Formation formation;
