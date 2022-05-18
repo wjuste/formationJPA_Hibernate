@@ -23,6 +23,7 @@ public class FormationDAO {
 			
 			//Pour chaque session de la formation 
 			for (SessionFormation session : formation.getSessions()) {
+				
 				em.persist(session);
 				System.out.println("Insertion de " + session);
 

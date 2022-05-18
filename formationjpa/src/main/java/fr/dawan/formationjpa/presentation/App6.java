@@ -3,6 +3,7 @@ package fr.dawan.formationjpa.presentation;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import fr.dawan.formationjpa.dao.FormationDAO;
 import fr.dawan.formationjpa.dao.GenericDAO;
 import fr.dawan.formationjpa.entities.Formateur;
 import fr.dawan.formationjpa.entities.Formation;
@@ -12,11 +13,11 @@ public class App6 {
 
 	public static void main(String[] args) {
 
-		Formation formationScrJavaScript = new Formation();
-		formationScrJavaScript.setCode("FOR-DEV005");
-		formationScrJavaScript.setDuree(2);
-		formationScrJavaScript.setNom("JavaScript");
-		formationScrJavaScript.setPrix(800);
+		Formation formationJavaScript = new Formation();
+		formationJavaScript.setCode("FOR-DEV005");
+		formationJavaScript.setDuree(2);
+		formationJavaScript.setNom("JavaScript");
+		formationJavaScript.setPrix(800);
 
 		Formateur formateur = new Formateur();
 		formateur.setEstInterne(true);
@@ -29,32 +30,39 @@ public class App6 {
 		sessionJuin.setNbPlaceMaxi(20);
 		sessionJuin.setNbPlace(16);
 		sessionJuin.setLieu("Nantes");
-		sessionJuin.setFormation(formationScrJavaScript);
+		sessionJuin.setFormation(formationJavaScript);
+		sessionJuin.setFormateur(formateur);
 
 		SessionFormation sessionSeptembre = new SessionFormation();
 		sessionSeptembre.setDate(LocalDate.of(2022, 9, 05));
 		sessionSeptembre.setNbPlaceMaxi(10);
 		sessionSeptembre.setNbPlace(8);
 		sessionSeptembre.setLieu("Paris");
-		sessionSeptembre.setFormation(formationScrJavaScript);
+		sessionSeptembre.setFormation(formationJavaScript);
+		sessionSeptembre.setFormateur(formateur);
 
 		//************************************************
 		//DEUXIEME TENTATIVE FORMATIONDAO (Cascade personnalisé)
 		//
+		
+		formationJavaScript.addSession(sessionSeptembre);
+		formationJavaScript.addSession(sessionJuin);
+		formateur.addCompentences(formationJavaScript);
+		FormationDAO.createFormation(formationJavaScript);
+		
 		//connaitre le nombre de session à partir de l'objet formation en memoire 
-		System.out.println("Nombre de sessions dans la formation Scrum : " + formationScrJavaScript.getSessions().size());
+		System.out.println("Nombre de sessions dans la formation Scrum : " + formationJavaScript.getSessions().size());
 
 		//Connaitre l'ID de la formation 
-		System.out.println("id de la formation " + formationScrJavaScript.getId());
+		System.out.println("id de la formation " + formationJavaScript.getId());
 
 
 		//Recuperation de la formation correspondante en base de données
-		Formation formationBDD = GenericDAO.findById(Formation.class, formationScrJavaScript.getId());
-
+		Formation formationBDD = GenericDAO.findById(Formation.class, formationJavaScript.getId());
 
 		//Connaitre le nombre de session à partir de l'objet formation provenant 
 		//de la base de données
-		System.out.println("Nombre de sessions dans la formation Scrum provenant de la base de données : "
+		System.out.println("Nombre de sessions dans la formation Javascript provenant de la base de données : "
 				+ formationBDD.getSessions().size());
 
 

@@ -115,6 +115,11 @@ public class Formation extends DbObject{
 		}
 	}
 	
+	public void addFormateurCompetent(Formateur formateur) {
+		if(!formateursCompetents.contains(formateur) && formateur != null) {
+			formateursCompetents.add(formateur);
+		}
+	}
 
 	public void setSessions(List<SessionFormation> sessions) {
 		this.sessions = sessions;

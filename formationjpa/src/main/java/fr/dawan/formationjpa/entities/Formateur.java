@@ -69,6 +69,18 @@ public class Formateur extends DbObject{
 	public void setEstInterne(boolean estInterne) {
 		this.estInterne = estInterne;
 	}
+	
+	public void addCompentences(Formation formation) {
+		this.competences.add(formation);
+	}
+
+	public Set<Formation> getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(Set<Formation> competences) {
+		this.competences = competences;
+	}
 
 	@Override
 	public String toString() {
