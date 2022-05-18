@@ -37,7 +37,7 @@ public class SessionFormation extends DbObject{
 	 * On peut specifier le nom de la clé étrangère avec l'annotation 
 	 * @JoinColumn
 	 */
-	//@ManyToOne (cascade = CascadeType.PERSIST)
+	//@ManyToOne (cascade = CascadeType.PERSIST) //Mauvaise methode 
 	@ManyToOne
 	@JoinColumn(name="id_formation")
 	private Formation formation;
@@ -88,6 +88,14 @@ public class SessionFormation extends DbObject{
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
 	}
 	
 }

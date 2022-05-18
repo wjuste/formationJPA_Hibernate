@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -58,7 +59,10 @@ public class Formation extends DbObject{
 	 * Sans l'annotation mappedBy, Hibernate va créer une table 
 	 * de relation , permettant de relier les deux tables
 	 */
-	@OneToMany(mappedBy = "formation", cascade = CascadeType.PERSIST)
+	
+	//Avec le cascade
+	//@OneToMany(mappedBy = "formation", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "formation", fetch = FetchType.EAGER)
 	List<SessionFormation> sessions = new ArrayList<SessionFormation>();
 	
 	/*

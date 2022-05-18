@@ -53,13 +53,13 @@ public class App5 {
 		
 		
 		//Recuperation de la formation correspondante en base de données
-	//	Formation formationBDD = GenericDAO.findById(Formation.class, formationScrum.getId());
+		Formation formationBDD = GenericDAO.findById(Formation.class, formationScrum.getId());
 		
 		
 		//Connaitre le nombre de session à partir de l'objet formation provenant 
 		//de la base de données
-	//	System.out.println("Nombre de sessions dans la formation Scrum : "
-	//			+ formationBDD.getSessions().size());
+		System.out.println("Nombre de sessions dans la formation Scrum provenant de la base de données : "
+				+ formationBDD.getSessions().size());
 		
 	}
 
