@@ -117,6 +117,20 @@ public class GenericDAO {
 		return resultat;
 	}
 	
+	public static<T extends DbObject> List<T> findAll(Class<T> clazz, int begin, int nbResult) {
+		List<T> resultat = null;
+		EntityManager em = createEntityManager();
+
+		//Creation de la raquête 
+		String sql = "SELECT entity FROM " + clazz.getName() + " entity";
+		TypedQuery<T> query =  em.createQuery(sql, clazz);
+		
+		resultat = query.setFirstResult(begin)   //On commence à ce numero (begin) - au Nième résultat 
+					.setMaxResults(nbResult)    //On charge le nbResultat
+					.getResultList();  //On recupère
+		return resultat;
+	}
+	
 	
 	public static EntityManager createEntityManager() {
 		EntityManagerFactory factory =  Persistence.createEntityManagerFactory("formationJPA");

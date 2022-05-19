@@ -97,5 +97,15 @@ public class SessionFormation extends DbObject{
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
 	}
+
+	@Override
+	public String toString() {
+		return "SessionFormation [lieu=" + lieu + ", date=" + date + ", nbPlaceMaxi=" + nbPlaceMaxi + ", nbPlace="
+				+ nbPlace + ", formation=" + formation + ", formateur=" + formateur + ", getId()=" + getId() + "]";
+	}
+
+	
+	
+	
 	
 }
