@@ -3,10 +3,10 @@ package fr.dawan.formationjpa.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,7 +35,7 @@ public class Formateur extends DbObject{
 	 * n -> n
 	 * ManyToMany
 	 */
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Formation> competences = new HashSet<Formation>();
 
 	public String getMatricule() {
