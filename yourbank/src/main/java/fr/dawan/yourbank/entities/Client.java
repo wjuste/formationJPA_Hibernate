@@ -1,6 +1,7 @@
 package fr.dawan.yourbank.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -32,16 +33,19 @@ public class Client implements Serializable{
 	//L'entité esclave doit avoir une attribut mappedBy qui doit 
 	//referencer le champs/attribut qui porte la relation côté maitre
 	@OneToMany(mappedBy = "client", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	private Collection<Compte> comptes;
+	private Collection<Compte> comptes; //null
 
 	public Client() {
 		super();
+		comptes = new ArrayList<Compte>();
 	}
 
 	public Client(String nom, String email) {
 		super();
 		this.nom = nom;
 		this.email = email;
+		comptes = new ArrayList<Compte>();
+
 	}
 
 	public long getCode() {
@@ -76,6 +80,10 @@ public class Client implements Serializable{
 		this.comptes = comptes;
 	}
 	
-	
+	public void addComptes(Compte compte) {
+		if(!comptes.contains(compte) && compte != null) {
+			this.comptes.add(compte);
+		}
+	}
 	
 }
